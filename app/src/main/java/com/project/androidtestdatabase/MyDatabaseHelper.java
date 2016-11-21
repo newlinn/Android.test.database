@@ -27,7 +27,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + " author TEXT,"
                 + " price REAL,"
-                + " page INTEGER,"
+                + " pages INTEGER,"
                 + " name TEXT"
                 + ")";
         sqLiteDatabase.execSQL(CREATE_BOOK);
