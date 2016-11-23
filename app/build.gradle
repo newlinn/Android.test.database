@@ -27,4 +27,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.1'
     testCompile 'junit:junit:4.12'
     compile files('src/main/libs/ormlite-android-5.0.jar')
+    compile files('src/main/libs/ormlite-core-5.0.jar')
 }
