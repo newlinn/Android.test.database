@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.project.androidtestdatabase.bean.Book;
+import com.project.androidtestdatabase.dao.BookDao;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     MyDatabaseHelper dbHelper;
@@ -19,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // TODO: 2016/11/20 database version
-        dbHelper = new MyDatabaseHelper(this, "BookStore.db", null, 1);
 
         Button btn_create_datebase = (Button) findViewById(R.id.btn_create_datebase);
         btn_create_datebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dbHelper = new MyDatabaseHelper(MainActivity.this, "BookStore.db", null, 1);
                 dbHelper.getWritableDatabase();
 
             }
@@ -104,6 +109,25 @@ public class MainActivity extends AppCompatActivity {
                 } finally {
                     db.endTransaction();
                 }
+            }
+        });
+
+        Button btn_orm = (Button) findViewById(R.id.btn_orm);
+        btn_orm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyOrmHelper orm = MyOrmHelper.getInstance(MainActivity.this);
+                Log.d("ORM", "MyOrmHelper.getInstance");
+                Book book = new Book();
+                book.setName("The Da Vinci Code");
+                book.setAuthor("Dan Brown");
+                book.setPages(454);
+                book.setPrice(16.96);
+                BookDao dao = new BookDao(MainActivity.this);
+                dao.add(book);
+
+                List<Book> lst = dao.getByName("The Da Vinci Code") ;
+                Toast.makeText(MainActivity.this, lst.size(), Toast.LENGTH_SHORT).show();
             }
         });
     }

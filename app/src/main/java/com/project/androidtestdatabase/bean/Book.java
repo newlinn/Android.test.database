@@ -12,6 +12,54 @@ import java.security.Key;
 
 @DatabaseTable(tableName = "book")
 public class Book {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
     @DatabaseField(generatedId = true)
     int id;
     @DatabaseField
@@ -25,7 +73,7 @@ public class Book {
     @DatabaseField
     int category_id;
 
-    Book() {
+    public Book() {
         // needed by ormlite
     }
 }

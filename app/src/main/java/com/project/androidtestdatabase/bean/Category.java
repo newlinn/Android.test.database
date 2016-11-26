@@ -12,12 +12,12 @@ public class Category {
 
     @DatabaseField(generatedId = true)
     int id;
-    @DatabaseField
+    @DatabaseField(canBeNull = false)
     String category_name;
     @DatabaseField
     int category_code;
 
-    Category() {
+    public Category() {
         // needed by ormlite
     }
 }
