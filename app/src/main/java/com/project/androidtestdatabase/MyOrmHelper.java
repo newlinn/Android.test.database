@@ -22,10 +22,11 @@ import java.util.Map;
 
 public class MyOrmHelper extends OrmLiteSqliteOpenHelper {
 
+    private static final String DB_NAME = "BookStore.db";
+    private static int DATABASE_VERSION = 1;
     private static MyOrmHelper instance;
 
     public static synchronized MyOrmHelper getInstance(Context context) {
-        context = context.getApplicationContext();
         if (instance == null) {
             synchronized (MyOrmHelper.class) {
                 if (instance == null) {
@@ -36,8 +37,7 @@ public class MyOrmHelper extends OrmLiteSqliteOpenHelper {
         return instance;
     }
 
-    private static final String DB_NAME = "BookStore.db";
-    private static int DATABASE_VERSION = 1;
+
     private Map<String, Dao> daos = new HashMap<>();
 
     private MyOrmHelper(Context context) {
@@ -55,7 +55,8 @@ public class MyOrmHelper extends OrmLiteSqliteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource,
+                          int i, int i1) {
         try {
             TableUtils.dropTable(connectionSource, Category.class, true);
             TableUtils.dropTable(connectionSource, Book.class, true);
@@ -72,6 +73,7 @@ public class MyOrmHelper extends OrmLiteSqliteOpenHelper {
             Dao dao = daos.get(key);
             dao = null;
         }
+        daos.clear();
     }
 
     public synchronized Dao getDao(Class cls) throws java.sql.SQLException {

@@ -52,12 +52,12 @@ public class Book {
         this.name = name;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @DatabaseField(generatedId = true)
@@ -70,8 +70,8 @@ public class Book {
     int pages;
     @DatabaseField
     String name;
-    @DatabaseField
-    int category_id;
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "category_id")
+    Category category;
 
     public Book() {
         // needed by ormlite

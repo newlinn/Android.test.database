@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.project.androidtestdatabase.bean.Book;
+import com.project.androidtestdatabase.bean.Category;
 import com.project.androidtestdatabase.dao.BookDao;
+import com.project.androidtestdatabase.dao.CategoryDao;
 
 import java.util.List;
 
@@ -118,16 +121,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 MyOrmHelper orm = MyOrmHelper.getInstance(MainActivity.this);
                 Log.d("ORM", "MyOrmHelper.getInstance");
+                Category category = new Category();
+                category.setCategory_code("S001");
+                category.setCategory_name("Dan Brown's");
+                CategoryDao cateDao = new CategoryDao(MainActivity.this);
+                cateDao.add(category);
+
                 Book book = new Book();
                 book.setName("The Da Vinci Code");
                 book.setAuthor("Dan Brown");
                 book.setPages(454);
                 book.setPrice(16.96);
+                book.setCategory(category);
                 BookDao dao = new BookDao(MainActivity.this);
                 dao.add(book);
 
                 List<Book> lst = dao.getByName("The Da Vinci Code") ;
-                Toast.makeText(MainActivity.this, lst.size(), Toast.LENGTH_SHORT).show();
+                for (int idx=0, max = lst.size();idx<max; idx++){
+                    Book b = lst.get(idx);
+                    String content = "Name:" + b.getName()
+                            + "  Price:" + b.getPrice()
+                            + "  Category:" + b.getCategory().getCategory_name();
+                    Toast.makeText(MainActivity.this, content, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
