@@ -1,17 +1,14 @@
 package com.project.androidtestdatabase.bean;
 
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.types.IntegerObjectType;
 import com.j256.ormlite.table.DatabaseTable;
-
-import java.security.Key;
 
 /**
  * Created by LingChen on 2016/11/23.
  */
 
 @DatabaseTable(tableName = "book")
-public class Book {
+public class Book extends AbsBean {
     public int getId() {
         return id;
     }

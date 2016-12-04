@@ -119,8 +119,7 @@ public class MainActivity extends AppCompatActivity {
         btn_orm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyOrmHelper orm = MyOrmHelper.getInstance(MainActivity.this);
-                Log.d("ORM", "MyOrmHelper.getInstance");
+
                 Category category = new Category();
                 category.setCategory_code("S001");
                 category.setCategory_name("Dan Brown's");

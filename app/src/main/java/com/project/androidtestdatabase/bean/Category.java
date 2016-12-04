@@ -10,7 +10,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 
 @DatabaseTable(tableName = "category")
-public class Category {
+public class Category extends AbsBean {
 
     public int getId() {
         return id;

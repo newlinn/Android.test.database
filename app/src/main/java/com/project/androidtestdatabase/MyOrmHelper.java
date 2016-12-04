@@ -76,16 +76,20 @@ public class MyOrmHelper extends OrmLiteSqliteOpenHelper {
         daos.clear();
     }
 
-    public synchronized Dao getDao(Class cls) throws java.sql.SQLException {
-        Dao dao = null;
+    public synchronized <T> Dao<T, Integer> getDaos(Class<T> cls) {
+        Dao<T, Integer> dao = null;
         String clsName = cls.getSimpleName();
         if (daos.containsKey((clsName))) {
-            dao = daos.get((clsName));
+            dao = daos.get(clsName);
         }
         if (dao == null) {
-            dao = super.getDao(cls);
+            try {
+                dao = super.getDao(cls);
+            } catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
             daos.put(clsName, dao);
         }
-        return dao;
+        return (Dao<T, Integer>)dao;
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
  * Created by newli on 2016/11/26.
  */
 
-public class BookDao extends AbstractDao<Book> {
+public class BookDao extends AbsDao<Book> {
 
     public BookDao(Context context) {
         super(context, Book.class);

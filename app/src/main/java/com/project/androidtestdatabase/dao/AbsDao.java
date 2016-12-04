@@ -2,6 +2,7 @@ package com.project.androidtestdatabase.dao;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.ObjectCache;
@@ -19,7 +20,7 @@ import java.util.Map;
  * Created by LingChen on 2016/12/4.
  */
 
-public abstract class AbstractDao<T> implements IDao<T> {
+public abstract class AbsDao<T> implements IDao<T> {
 
     public Dao<T, Integer> getDao() {
         return dao;
@@ -31,12 +32,8 @@ public abstract class AbstractDao<T> implements IDao<T> {
 
     private Dao<T, Integer> dao;
 
-    public AbstractDao(Context context, Class<T> cls) {
-        try {
-            this.dao = MyOrmHelper.getInstance(context).getDao(cls);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public AbsDao(Context context, Class<T> cls) {
+        this.dao = MyOrmHelper.getInstance(context).getDaos(cls);
     }
 
     @Override
